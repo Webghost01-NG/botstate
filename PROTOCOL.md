@@ -1,0 +1,1 @@
+# BOTSTATE Protocol Documentation
