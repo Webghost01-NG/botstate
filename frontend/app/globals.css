@@ -1,0 +1,139 @@
+:root {
+  /* BOT Chain Protocol Colors */
+  --color-primary: #078984;       /* Official BOT Chain Emerald Teal */
+  --color-primary-light: #0EA59D;
+  --color-primary-dark: #005350;
+  --color-primary-faint: rgba(7, 137, 132, 0.08);
+  --color-accent: #00D2A0;        /* BOT Chain Neon Cyan / Mint */
+  --color-accent-light: #34E5BC;
+  --color-accent-dark: #059669;
+  --color-gold: #C9A84C;          /* RWA Real Estate Gold */
+  --color-bg: #F7FCFB;            /* Light Protocol Clean Backdrop */
+  --color-bg-secondary: #EAF6F5;
+  --color-bg-card: #FFFFFF;
+  --color-text: #0B1918;          /* Deep Teal Charcoal */
+  --color-text-secondary: #42615F;
+  --color-text-muted: #729694;
+  --color-border: #D6EFEB;
+  --color-success: #059669;
+  --color-danger: #E11D48;
+  --color-warning: #D97706;
+  
+  /* Typography */
+  --font-heading: 'DM Serif Display', serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  
+  /* Shadows with BOT Chain Brand Glow */
+  --shadow-sm: 0 1px 3px rgba(7, 137, 132, 0.08);
+  --shadow-md: 0 4px 14px rgba(7, 137, 132, 0.10);
+  --shadow-lg: 0 10px 32px rgba(7, 137, 132, 0.15);
+  
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.main-content {
+  flex: 1;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.btn-accent:hover {
+  background-color: var(--color-accent-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
