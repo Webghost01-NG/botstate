@@ -7,3 +7,4 @@
 - Optimization update phase 7 for BOTSTATE protocol
 - Optimization update phase 8 for BOTSTATE protocol
 - Optimization update phase 9 for BOTSTATE protocol
+- Optimization update phase 10 for BOTSTATE protocol
