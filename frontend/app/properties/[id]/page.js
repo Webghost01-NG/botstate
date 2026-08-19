@@ -82,8 +82,8 @@ export default function PropertyDetail({ params }) {
         msg: `Please confirm transaction in MetaMask (${totalCost} tBOT)...` 
       });
 
-      // Target contract / escrow address (deployer/marketplace address on BOT Chain Testnet)
-      const targetContract = '0x6CeD8D6Bad8Dfd2e60BCEA116fE74548f959f1F2';
+      // Target BOTSTATE Marketplace Smart Contract on BOT Chain
+      const targetContract = '0x08D1B8fD3b831e79f000fFA3B1B0F69064080f24';
       
       // Execute real on-chain transaction with explicit gas limit (bypasses RPC estimateGas error)
       const tx = await signer.sendTransaction({
