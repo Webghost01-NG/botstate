@@ -6,6 +6,7 @@ export const BOT_TESTNET_EXPLORER = 'https://scan.bohr.life';
 
 export const BOT_MAINNET_CHAIN_ID = '0x2A5'; // 677
 export const BOT_MAINNET_RPC_URL = 'https://rpc.botchain.ai';
+export const BOT_MAINNET_EXPLORER = 'https://scan.botchain.ai';
 
 // Safe resolution of MetaMask in single-wallet or multi-wallet browser environments
 export const getEthereumProvider = () => {
@@ -29,7 +30,7 @@ export const connectWallet = async () => {
       const accounts = await provider.request({ method: 'eth_requestAccounts' });
       if (accounts && accounts.length > 0) {
         try {
-          await switchToBotChainTestnet();
+          await switchToBotChainMainnet();
         } catch (chainErr) {
           console.warn('Network switch notice:', chainErr);
         }
@@ -46,7 +47,7 @@ export const connectWallet = async () => {
   }
 
   console.info('MetaMask provider not detected, using demo test wallet session.');
-  const demoAccount = '0x71C836443ab54c561563967b6232895E5eC949b2';
+  const demoAccount = '0x6CeD8D6Bad8Dfd2e60BCEA116fE74548f959f1F2';
   if (typeof window !== 'undefined') {
     localStorage.setItem('botstate_demo_wallet', demoAccount);
   }
@@ -79,6 +80,41 @@ export const disconnectWallet = async () => {
   }
 };
 
+export const switchToBotChainMainnet = async () => {
+  const provider = getEthereumProvider();
+  if (!provider) return;
+
+  try {
+    await provider.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: BOT_MAINNET_CHAIN_ID }],
+    });
+  } catch (switchError) {
+    if (switchError.code === 4902 || switchError.data?.originalError?.code === 4902) {
+      try {
+        await provider.request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            {
+              chainId: BOT_MAINNET_CHAIN_ID,
+              chainName: 'BOT Chain Mainnet',
+              rpcUrls: [BOT_MAINNET_RPC_URL],
+              blockExplorerUrls: [BOT_MAINNET_EXPLORER],
+              nativeCurrency: {
+                name: 'BOT',
+                symbol: 'BOT',
+                decimals: 18,
+              },
+            },
+          ],
+        });
+      } catch (addError) {
+        console.warn('Error adding BOT Chain Mainnet to MetaMask', addError);
+      }
+    }
+  }
+};
+
 export const switchToBotChainTestnet = async () => {
   const provider = getEthereumProvider();
   if (!provider) return;
@@ -89,7 +125,6 @@ export const switchToBotChainTestnet = async () => {
       params: [{ chainId: BOT_TESTNET_CHAIN_ID }],
     });
   } catch (switchError) {
-    // Chain 968 not yet added to MetaMask (Error 4902)
     if (switchError.code === 4902 || switchError.data?.originalError?.code === 4902) {
       try {
         await provider.request({
