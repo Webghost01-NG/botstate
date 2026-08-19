@@ -3,7 +3,7 @@ import { useState, useEffect, use } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { getAccount, connectWallet, getEthereumProvider, switchToBotChainTestnet, BOT_TESTNET_CHAIN_ID } from '../../utils/web3';
-import { BrowserProvider, parseEther } from 'ethers';
+import { BrowserProvider, parseEther, parseUnits } from 'ethers';
 import styles from './page.module.css';
 
 export default function PropertyDetail({ params }) {
@@ -85,10 +85,12 @@ export default function PropertyDetail({ params }) {
       // Target contract / escrow address (deployer/marketplace address on BOT Chain Testnet)
       const targetContract = '0x6CeD8D6Bad8Dfd2e60BCEA116fE74548f959f1F2';
       
-      // Execute real on-chain transaction
+      // Execute real on-chain transaction with explicit gas limit (bypasses RPC estimateGas error)
       const tx = await signer.sendTransaction({
         to: targetContract,
         value: parseEther(totalCost),
+        gasLimit: 100000n,
+        gasPrice: parseUnits('25', 'gwei')
       });
 
       setTxState({
