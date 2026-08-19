@@ -1,0 +1,187 @@
+.header {
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 100px;
+  background-color: rgba(10, 61, 61, 0.08);
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-border);
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.stepperNav {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.stepBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-base);
+  font-family: inherit;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.stepNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.stepTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.activeStep {
+  border-color: var(--color-primary);
+  background-color: rgba(10, 61, 61, 0.04);
+}
+
+.activeStep .stepNum {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.activeStep .stepTitle {
+  color: var(--color-primary);
+}
+
+.completedStep {
+  border-color: var(--color-success);
+}
+
+.completedStep .stepNum {
+  background-color: var(--color-success);
+  color: white;
+}
+
+.stageCard {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.cardHeader h2 {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 0.35rem;
+}
+
+.cardSubtext {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.stepBadge {
+  background-color: var(--color-bg-secondary);
+  padding: 0.35rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem;
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.detailKey {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detailVal {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  word-break: break-all;
+}
+
+.detailVal code {
+  font-family: monospace;
+  color: var(--color-primary);
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5rem;
+}
+
+.infoBanner {
+  padding: 1.25rem 1.5rem;
+  background-color: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}

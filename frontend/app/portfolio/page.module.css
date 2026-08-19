@@ -1,0 +1,123 @@
+.centerContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subtext {
+  color: var(--color-text-secondary);
+  margin-top: var(--space-md);
+  font-size: 1.1rem;
+}
+
+.pageHeader {
+  padding: var(--space-2xl) 0 var(--space-xl);
+}
+
+.title {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--color-text-secondary);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-3xl);
+}
+
+.section {
+  margin-bottom: var(--space-3xl);
+}
+
+.section h2 {
+  font-size: 1.75rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-bg-secondary);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.table td {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.positive {
+  color: var(--color-success) !important;
+  font-weight: 500;
+}
+
+.negative {
+  color: var(--color-danger) !important;
+  font-weight: 500;
+}
+
+.recommendationCard {
+  background-color: var(--color-primary-light);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+}
+
+.recHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  opacity: 0.9;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.recText {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.recommendationCard .btn-outline {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.recommendationCard .btn-outline:hover {
+  background-color: #fff;
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
