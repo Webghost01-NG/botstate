@@ -2,6 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "./RWAToken.sol";
+import "./SamplePropertyToken.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
@@ -14,6 +15,14 @@ contract RWATokenFactory is Ownable {
     event TokenCreated(uint256 indexed propertyId, address tokenAddress, string name, string symbol);
 
     constructor() Ownable(msg.sender) {}
+
+    function createSampleToken(uint256 propertyId) external onlyOwner returns (address) {
+        require(propertyTokens[propertyId] == address(0), "Token already created for this property");
+        SamplePropertyToken token = new SamplePropertyToken(propertyId, msg.sender);
+        propertyTokens[propertyId] = address(token);
+        emit TokenCreated(propertyId, address(token), "BOTSTATE Sample Residence", "SAMPLE-RWA");
+        return address(token);
+    }
 
     function createToken(
         uint256 propertyId,

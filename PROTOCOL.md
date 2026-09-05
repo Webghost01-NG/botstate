@@ -6,7 +6,7 @@
 - Holdings are read from tokens mapped by active registry properties, at one block. Unregistered/inactive assets are outside this scan; more than 100 active records fails explicitly.
 - Deployment records are marked confirmed only after the exact successful creation receipt and deployed code presence are checked. This does not prove audited source correspondence.
 - Missing catalog IDs return 404. Catalog entries and yields are illustrative.
-- No page submits payment transactions, registration fees or valuation signatures.
+- Real-investment pages do not submit payment transactions, registration fees or valuation signatures. `/deploy` and `/judge` prepare explicit MetaMask-confirmed zero-value deployment/setup/sample-claim transactions; users pay network gas.
 - Wallet connection requires a real provider; account rejection and chain-switch failures propagate.
 
 ## Contract source repairs (not deployed)

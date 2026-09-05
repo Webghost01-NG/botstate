@@ -23,7 +23,8 @@
 
 .links {
   display: flex;
-  gap: var(--space-xl);
+  gap: var(--space-md);
+  flex-wrap: wrap;
 }
 
 .link {
