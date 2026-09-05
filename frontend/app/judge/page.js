@@ -1,5 +1,5 @@
 import JudgeClient from './JudgeClient';
-export default async function JudgePage({ searchParams }) {
-  const params = await searchParams;
-  return <JudgeClient token={typeof params.token === 'string' ? params.token : ''} />;
+import deployment from '../data/active-deployment.json';
+export default function JudgePage() {
+  return <JudgeClient token={deployment.sample.address} />;
 }

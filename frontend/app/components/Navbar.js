@@ -15,9 +15,7 @@ export default function Navbar() {
           <Link href="/chat" className={styles.link}>AI Advisor</Link>
           <Link href="/portfolio" className={styles.link}>Portfolio</Link>
           <Link href="/agent" className={styles.link}>AIDID Agent</Link>
-          <Link href="/proof" className={styles.link}>Proof ⛓️</Link>
-          <Link href="/demo" className={styles.link} style={{ color: 'var(--color-gold)', fontWeight: 600 }}>Demo 🎮</Link>
-          <Link href="/deploy" className={styles.link}>Deploy</Link>
+          <Link href="/judge" className={styles.link}>Sample asset</Link>
         </div>
         <div className={styles.actions}>
           <WalletButton />

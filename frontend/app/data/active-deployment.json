@@ -1,46 +1,81 @@
 {
-  "network": "botchainMainnet",
+  "release": "sample-mainnet-v1",
   "chainId": 677,
   "deployer": "0x6CeD8D6Bad8Dfd2e60BCEA116fE74548f959f1F2",
-  "canonicalManifest": "../frontend/app/data/active-deployment.json",
+  "sourceCommit": "b065e9a07cf625c2649d0017b55c38a7c5b220b7",
   "contracts": {
     "PropertyRegistry": "0xF18b2a4f7868c9108F678552e0F679AEbC2Ba604",
     "RWATokenFactory": "0xd951A7094814DC2Ab9BE5F5E263A0081C89f323F",
     "Marketplace": "0x602AE8011F478EBbe87Da760C054B5C25911612a",
-    "AgentActionLog": "0x79e6B29e253eCA1d506AF330Bb17937Cba9327a7",
-    "SamplePropertyToken": "0x6848018dbC74f4929927F7B9ccce62cf536fFE2E"
+    "AgentActionLog": "0x79e6B29e253eCA1d506AF330Bb17937Cba9327a7"
   },
-  "receipts": {
-    "PropertyRegistry": {
+  "records": [
+    {
+      "name": "PropertyRegistry",
       "address": "0xF18b2a4f7868c9108F678552e0F679AEbC2Ba604",
       "txHash": "0xcbe3e522f383ad0186e1c5bdc022012dd8a91e04241a8aec875de34ce9acf3de",
       "block": 22211997,
       "runtimeHash": "0xdae5e2aa2e954c8ffc76720e81a1fc88fbca83080115996741746a4220348436"
     },
-    "RWATokenFactory": {
+    {
+      "name": "RWATokenFactory",
       "address": "0xd951A7094814DC2Ab9BE5F5E263A0081C89f323F",
       "txHash": "0x84c25e366b0c1f56f716ff3a4b850d16de7c526d99f392faefd574c0f72f8499",
       "block": 22212243,
       "runtimeHash": "0xd195d32c152ff4911745e0627c80c9c549f91c527525df20b6c21d390cb75694"
     },
-    "Marketplace": {
+    {
+      "name": "Marketplace",
       "address": "0x602AE8011F478EBbe87Da760C054B5C25911612a",
       "txHash": "0xb77a03c30981ee80a0f2c90b350e7831dd1d1a96102fc8d259cffb7304624433",
       "block": 22212278,
       "runtimeHash": "0xc25696fad312fd9b8f21f5ebfe4c76c89850c4411f00639a739510256fc2dda7"
     },
-    "AgentActionLog": {
+    {
+      "name": "AgentActionLog",
       "address": "0x79e6B29e253eCA1d506AF330Bb17937Cba9327a7",
       "txHash": "0x81de9ce69f7327c0471ba0eddf75faae343c98f100e09e924b8ad7b66beae8da",
       "block": 22212333,
       "runtimeHash": "0x8b2f9a11c3c51c2cf057c7cdd549d92e8297746fbe19ee938782d3ec4bc110e1"
     }
-  },
+  ],
   "sample": {
     "propertyId": 900001,
     "address": "0x6848018dbC74f4929927F7B9ccce62cf536fFE2E",
     "runtimeHash": "0x11a3e2729ddfddf93a9d7aeb6d93455893b0f7548427a2135bd1a6ea26123b3b",
     "registrationTx": "0x0027b9d002e633081d91564ee2ff4dd3d473490db9fc0d72288b9f4658701d8e",
     "creationTx": "0x9ad6c86c40bb88ed31633104a407f21768d3dff8314b2624d468da56005884e2"
-  }
+  },
+  "transactions": [
+    {
+      "step": 0,
+      "hash": "0xcbe3e522f383ad0186e1c5bdc022012dd8a91e04241a8aec875de34ce9acf3de",
+      "blockNumber": 22211997
+    },
+    {
+      "step": 1,
+      "hash": "0x84c25e366b0c1f56f716ff3a4b850d16de7c526d99f392faefd574c0f72f8499",
+      "blockNumber": 22212243
+    },
+    {
+      "step": 2,
+      "hash": "0xb77a03c30981ee80a0f2c90b350e7831dd1d1a96102fc8d259cffb7304624433",
+      "blockNumber": 22212278
+    },
+    {
+      "step": 3,
+      "hash": "0x81de9ce69f7327c0471ba0eddf75faae343c98f100e09e924b8ad7b66beae8da",
+      "blockNumber": 22212333
+    },
+    {
+      "step": 4,
+      "hash": "0x0027b9d002e633081d91564ee2ff4dd3d473490db9fc0d72288b9f4658701d8e",
+      "blockNumber": 22212387
+    },
+    {
+      "step": 5,
+      "hash": "0x9ad6c86c40bb88ed31633104a407f21768d3dff8314b2624d468da56005884e2",
+      "blockNumber": 22212456
+    }
+  ]
 }

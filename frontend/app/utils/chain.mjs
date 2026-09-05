@@ -1,13 +1,9 @@
-import { Interface, formatEther, formatUnits, isAddress } from 'ethers';
+import { Interface, formatEther, formatUnits, isAddress, keccak256 } from 'ethers';
+import activeDeployment from '../data/active-deployment.json' with { type: 'json' };
 export const CHAIN_ID = 677;
 export const RPC_URL = 'https://rpc.botchain.ai';
 export const EXPLORER = 'https://scan.botchain.ai';
-export const deployments = [
-  { name: 'PropertyRegistry', address: '0x8cd2DA9E45D18c47A803f065a3625AE68bF37B17', txHash: '0x5dcb2de31ea0b7c437f5aa8889a06a822c76b8d246b990a6c7d6a71b5f1e84d3', block: 20198070 },
-  { name: 'RWATokenFactory', address: '0x0908E0409d593409D251306302FDca0C45198B9C', txHash: '0x824424b7e58248c4aff226a47f7f093d3c33836ed7e3745d03700aa64629e0d1', block: 20198081 },
-  { name: 'Marketplace', address: '0x08D1B8fD3b831e79f000fFA3B1B0F69064080f24', txHash: '0xd5845d371dd8dce3aa2831ecf0640bc63436195e3b346a256ae5bffe0826f4b0', block: 20198086 },
-  { name: 'AgentActionLog', address: '0xbb42F96B7Dd1FC127f7A9729C178EFE15ADa8F0a', txHash: '0x832067a6862a8d0c7909f9583ee819fc12c09f1a5e9b491d9273a5c194ecb66c', block: 20198091 }
-];
+export const deployments = activeDeployment.records;
 export async function rpc(method, params = []) {
   const response = await fetch(RPC_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }), signal: AbortSignal.timeout(8000), cache: 'no-store' });
   if (!response.ok) throw new Error('Mainnet RPC unavailable.');
@@ -21,7 +17,8 @@ export async function requireMainnet(read = rpc) {
 export function matchesDeployment(record, receipt, code) {
   return !!receipt && receipt.status === '0x1' && receipt.transactionHash?.toLowerCase() === record.txHash.toLowerCase()
     && receipt.contractAddress?.toLowerCase() === record.address.toLowerCase()
-    && Number(BigInt(receipt.blockNumber)) === record.block && typeof code === 'string' && code.length > 2;
+    && Number(BigInt(receipt.blockNumber)) === record.block && typeof code === 'string' && /^0x(?:[a-f0-9]{2})+$/i.test(code)
+    && keccak256(code) === record.runtimeHash;
 }
 export async function deploymentEvidence(read = rpc) {
   await requireMainnet(read);

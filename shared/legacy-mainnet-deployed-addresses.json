@@ -1,0 +1,34 @@
+{
+  "network": "botchainMainnet",
+  "chainId": 677,
+  "deployer": "0x6CeD8D6Bad8Dfd2e60BCEA116fE74548f959f1F2",
+  "deployedAt": "2026-08-19T09:40:30.040Z",
+  "contracts": {
+    "PropertyRegistry": "0x8cd2DA9E45D18c47A803f065a3625AE68bF37B17",
+    "RWATokenFactory": "0x0908E0409d593409D251306302FDca0C45198B9C",
+    "Marketplace": "0x08D1B8fD3b831e79f000fFA3B1B0F69064080f24",
+    "AgentActionLog": "0xbb42F96B7Dd1FC127f7A9729C178EFE15ADa8F0a"
+  },
+  "receipts": {
+    "PropertyRegistry": {
+      "address": "0x8cd2DA9E45D18c47A803f065a3625AE68bF37B17",
+      "txHash": "0x5dcb2de31ea0b7c437f5aa8889a06a822c76b8d246b990a6c7d6a71b5f1e84d3",
+      "block": 20198070
+    },
+    "RWATokenFactory": {
+      "address": "0x0908E0409d593409D251306302FDca0C45198B9C",
+      "txHash": "0x824424b7e58248c4aff226a47f7f093d3c33836ed7e3745d03700aa64629e0d1",
+      "block": 20198081
+    },
+    "Marketplace": {
+      "address": "0x08D1B8fD3b831e79f000fFA3B1B0F69064080f24",
+      "txHash": "0xd5845d371dd8dce3aa2831ecf0640bc63436195e3b346a256ae5bffe0826f4b0",
+      "block": 20198086
+    },
+    "AgentActionLog": {
+      "address": "0xbb42F96B7Dd1FC127f7A9729C178EFE15ADa8F0a",
+      "txHash": "0x832067a6862a8d0c7909f9583ee819fc12c09f1a5e9b491d9273a5c194ecb66c",
+      "block": 20198091
+    }
+  }
+}
