@@ -32,6 +32,6 @@ export default function Portfolio() {
     <form onSubmit={refresh}><label htmlFor="wallet-address">Wallet address</label><div className="review-actions"><input id="wallet-address" required value={address} onChange={e => {setAddress(e.target.value);setData(null);}} placeholder="0x…" size="45" /><button disabled={busy} className="btn btn-primary">{busy ? 'Reading…' : 'Read mainnet'}</button><button type="button" className="btn btn-outline" onClick={connect}>Use connected wallet</button></div></form>
     {error && <p role="alert">{error}</p>}
     {data && <section className="review-card"><h2>{data.walletBalance} BOT</h2><p>Address: {data.address} · Chain {data.chainId} · Block {data.blockNumber}</p><p>{data.scope}</p>{data.holdings.length ? data.holdings.map(h => <p key={h.token}>{h.balance} {h.symbol} — {h.token}</p>) : <p>No token holdings found in this registry scope.</p>}</section>}
-    <p>No yield or rental payment is assumed from a token balance. The original dividend function does not pay holders.</p>
+    <p>Balances use the newly deployed registry. SAMPLE-RWA is a fictional sample asset, not real property. The new token supports funded dividend claims, but no rental income, funding or yield is promised.</p>
   </PageShell>;
 }

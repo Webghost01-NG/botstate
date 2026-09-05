@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 import properties from '../../../data/properties.json';
+import { sampleAsset } from '../../../utils/sample.mjs';
 
 export async function GET(request, { params }) {
   const { id } = await params;
+  if (id === sampleAsset.id) return NextResponse.json({ property: sampleAsset, mode: 'sample', aiAnalysis: 'Fictional sample asset; no independent appraisal.', comparables: [] });
   const property = properties.find(p => p.id === id);
 
   if (!property) {

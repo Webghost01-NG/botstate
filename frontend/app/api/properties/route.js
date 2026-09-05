@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import properties from '../../data/properties.json';
+import { sampleAsset } from '../../utils/sample.mjs';
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -33,5 +34,5 @@ export async function GET(request) {
     else if (sortBy === 'risk-asc') filtered.sort((a, b) => a.riskScore - b.riskScore);
   }
 
-  return NextResponse.json({ properties: filtered, total: filtered.length, mode: 'sample', purchasesEnabled: false });
+  return NextResponse.json({ properties: filtered, total: filtered.length, mode: 'sample', purchasesEnabled: false, mainnetSample: sampleAsset });
 }

@@ -52,7 +52,7 @@
 .review-page { padding-top: 3rem; padding-bottom: 4rem; }
 .review-page h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: 1rem; }
 .review-page h2 { margin: 1rem 0; }
-.review-page p { margin: 1rem 0; line-height: 1.7; }
+.review-page p { margin: 1rem 0; line-height: 1.7; overflow-wrap: anywhere; }
 .review-intro { max-width: 760px; color: var(--color-text-secondary); font-size: 1.15rem; }
 .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; margin: 2rem 0; }
 .review-card, .review-notice { padding: 1.5rem; border: 1px solid var(--color-border); border-radius: 16px; background: white; overflow-wrap: anywhere; }

@@ -1,7 +1,8 @@
 import properties from '../../../../data/properties.json';
 import { sampleValuation } from '../../../../utils/catalog.mjs';
+import { sampleAsset } from '../../../../utils/sample.mjs';
 export async function GET(request, { params }) {
   const { id } = await params;
-  const property = properties.find(p => p.id === id);
+  const property = id === sampleAsset.id ? sampleAsset : properties.find(p => p.id === id);
   return property ? Response.json(sampleValuation(property)) : Response.json({ error: 'Property not found' }, { status: 404 });
 }

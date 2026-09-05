@@ -18,9 +18,9 @@ export default function Footer() {
           </div>
           <div className={styles.linkGroup}>
             <h3>Resources</h3>
-            <a href="#">Documentation</a>
-            <a href="#">Whitepaper</a>
-            <a href="#">Smart Contracts</a>
+            <a href="https://github.com/Webghost01-NG/botstate#readme">Documentation</a>
+            <a href="https://github.com/Webghost01-NG/botstate">Source code</a>
+            <a href="https://github.com/Webghost01-NG/botstate#mainnet-transactions">Smart Contracts</a>
           </div>
         </div>
       </div>

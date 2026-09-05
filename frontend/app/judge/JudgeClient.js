@@ -9,7 +9,7 @@ export default function JudgeClient({ token }) {
   const [account, setAccount] = useState('');
   const [state, setState] = useState(null);
   const [quote, setQuote] = useState(null);
-  const [message, setMessage] = useState('Use the judge link produced by a confirmed deployment.');
+  const [message, setMessage] = useState('Connect MetaMask to verify the sample contract and check your claim eligibility.');
   const [busy, setBusy] = useState(false);
   const lock = useRef(false);
   async function action(work) {
@@ -67,9 +67,9 @@ export default function JudgeClient({ token }) {
     if (!event) throw new Error('Expected sample claim event not found.');
     await read(wallet.account); setMessage('Confirmed sample claim: ' + transaction.hash);
   }); }
-  return <PageShell title="Judge sample asset" intro="Free demonstration tokens on BOT Chain mainnet. No real property or promised rental returns.">
+  return <PageShell title="BOTSTATE Sample Residence" intro="Free sample tokens on BOT Chain mainnet. No real property or promised rental returns.">
     <section className="review-notice"><strong>Sample only — real gas fees apply</strong><p>You receive 10 SAMPLE-RWA tokens once per wallet. This is a test asset with no property rights or promised value. You never approve a token allowance or pay a purchase price.</p></section>
-    <p>Sample contract: {token || 'Not supplied — complete deployment first'}</p>
+    <p>Sample contract: <a href={'https://scan.botchain.ai/address/' + token} target="_blank" rel="noreferrer">{token}</a></p>
     <div className="review-actions"><button className="btn btn-primary" onClick={connect} disabled={busy || !isAddress(token)}>Connect MetaMask and verify</button><button className="btn btn-outline" onClick={estimate} disabled={busy || !account}>Estimate free claim</button>{account && <button className="btn btn-outline" disabled={busy} onClick={() => action(() => read(account))}>Refresh verified balance</button>}</div>
     {state && <section className="review-card"><h2>{state.balance} SAMPLE-RWA</h2><p>Account: {state.account}</p><p>{state.notice}</p><p>{state.claimed ? 'Free sample claim already used.' : 'Free sample claim available.'}</p></section>}
     {quote && <section className="review-card"><p>Token price: 0 BOT. Estimated network gas budget: {quote.fee} BOT.</p><button className="btn btn-primary" onClick={claim} disabled={busy}>Open MetaMask to claim samples</button></section>}

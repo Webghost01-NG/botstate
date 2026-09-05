@@ -1,1 +1,1 @@
-{"release":"metamask-samples-v1","writesEnabled":false,"signingEnabled":false,"walletDeploymentEnabled":true,"sampleClaimsEnabled":true,"network":"BOT Chain mainnet","chainId":677}
+{"release":"sample-mainnet-v1","writesEnabled":false,"signingEnabled":false,"walletDeploymentEnabled":false,"sampleClaimsEnabled":true,"network":"BOT Chain mainnet","chainId":677,"sampleToken":"0x6848018dbC74f4929927F7B9ccce62cf536fFE2E"}
