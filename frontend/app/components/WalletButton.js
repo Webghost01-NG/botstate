@@ -6,26 +6,23 @@ import styles from './WalletButton.module.css';
 export default function WalletButton() {
   const [account, setAccount] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const init = async () => {
-      const acc = await getAccount();
-      if (acc) setAccount(acc);
+      try { setAccount((await getAccount()) || ''); }
+      catch { setAccount(''); }
     };
     init();
 
     const provider = getEthereumProvider();
     if (provider && provider.on) {
-      const handleAccountsChanged = (accounts) => {
-        if (accounts.length > 0) {
-          setAccount(accounts[0]);
-        } else {
-          setAccount('');
-        }
-      };
+      const handleAccountsChanged = init;
 
       provider.on('accountsChanged', handleAccountsChanged);
+      window.addEventListener('botstate-wallet', init);
       return () => {
+        window.removeEventListener('botstate-wallet', init);
         if (provider.removeListener) {
           provider.removeListener('accountsChanged', handleAccountsChanged);
         }
@@ -35,11 +32,12 @@ export default function WalletButton() {
 
   const handleConnect = async () => {
     setLoading(true);
+    setError('');
     try {
       const acc = await connectWallet();
       if (acc) setAccount(acc);
     } catch (error) {
-      console.error('Wallet connection failed', error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -68,6 +66,7 @@ export default function WalletButton() {
   }
 
   return (
+    <div>
     <button 
       className={`btn btn-accent ${styles.walletBtn}`} 
       onClick={handleConnect}
@@ -75,5 +74,7 @@ export default function WalletButton() {
     >
       {loading ? 'Connecting...' : 'Connect Wallet'}
     </button>
+    {error && <p role="alert">{error}</p>}
+    </div>
   );
 }

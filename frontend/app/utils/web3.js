@@ -1,159 +1,47 @@
 import { BrowserProvider } from 'ethers';
-
-export const BOT_TESTNET_CHAIN_ID = '0x3C8'; // 968
-export const BOT_TESTNET_RPC_URL = 'https://rpc.bohr.life';
-export const BOT_TESTNET_EXPLORER = 'https://scan.bohr.life';
-
-export const BOT_MAINNET_CHAIN_ID = '0x2A5'; // 677
+export const BOT_MAINNET_CHAIN_ID = '0x2a5';
 export const BOT_MAINNET_RPC_URL = 'https://rpc.botchain.ai';
 export const BOT_MAINNET_EXPLORER = 'https://scan.botchain.ai';
-
-// Safe resolution of MetaMask in single-wallet or multi-wallet browser environments
-export const getEthereumProvider = () => {
+export const BOT_TESTNET_CHAIN_ID = '0x3c8';
+export const BOT_TESTNET_RPC_URL = 'https://rpc.bohr.life';
+export const BOT_TESTNET_EXPLORER = 'https://scan.bohr.life';
+export function getEthereumProvider() {
   if (typeof window === 'undefined') return null;
-
-  if (window.ethereum) {
-    if (window.ethereum.providers && Array.isArray(window.ethereum.providers)) {
-      const metaMaskProvider = window.ethereum.providers.find((p) => p.isMetaMask);
-      if (metaMaskProvider) return metaMaskProvider;
-    }
-    return window.ethereum;
-  }
-  return null;
-};
-
-export const connectWallet = async () => {
+  return window.ethereum?.providers?.find(p => p.isMetaMask) || window.ethereum || null;
+}
+export async function getAccount() {
+  if (typeof window === 'undefined' || sessionStorage.getItem('botstate_disconnected')) return null;
   const provider = getEthereumProvider();
-
-  if (provider) {
-    try {
-      const accounts = await provider.request({ method: 'eth_requestAccounts' });
-      if (accounts && accounts.length > 0) {
-        try {
-          await switchToBotChainMainnet();
-        } catch (chainErr) {
-          console.warn('Network switch notice:', chainErr);
-        }
-        return accounts[0];
-      }
-    } catch (error) {
-      if (error.code === 4001) {
-        console.warn('User rejected connection request.');
-      } else {
-        console.error('Error connecting to MetaMask', error);
-      }
-      throw error;
-    }
-  }
-
-  console.info('MetaMask provider not detected, using demo test wallet session.');
-  const demoAccount = '0x6CeD8D6Bad8Dfd2e60BCEA116fE74548f959f1F2';
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('botstate_demo_wallet', demoAccount);
-  }
-  return demoAccount;
-};
-
-export const getAccount = async () => {
+  return provider ? (await provider.request({ method: 'eth_accounts' }))[0] || null : null;
+}
+export async function connectWallet() {
   const provider = getEthereumProvider();
-
-  if (provider) {
-    try {
-      const accounts = await provider.request({ method: 'eth_accounts' });
-      if (accounts && accounts.length > 0) {
-        return accounts[0];
-      }
-    } catch (e) {
-      console.warn('Error querying accounts', e);
-    }
-  }
-
-  if (typeof window !== 'undefined') {
-    return localStorage.getItem('botstate_demo_wallet') || null;
-  }
-  return null;
-};
-
-export const disconnectWallet = async () => {
-  if (typeof window !== 'undefined') {
-    localStorage.removeItem('botstate_demo_wallet');
-  }
-};
-
-export const switchToBotChainMainnet = async () => {
+  if (!provider) throw new Error('Install an Ethereum-compatible wallet to connect. No demo account is connected.');
+  const accounts = await provider.request({ method: 'eth_requestAccounts' });
+  if (!accounts[0]) throw new Error('No wallet account selected.');
+  sessionStorage.removeItem('botstate_disconnected');
+  window.dispatchEvent(new Event('botstate-wallet'));
+  return accounts[0];
+}
+export async function disconnectWallet() {
+  sessionStorage.setItem('botstate_disconnected', 'true');
+  window.dispatchEvent(new Event('botstate-wallet'));
+}
+async function switchChain(chainId, name, rpc, explorer, symbol) {
   const provider = getEthereumProvider();
-  if (!provider) return;
-
+  if (!provider) throw new Error('Wallet unavailable.');
   try {
-    await provider.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: BOT_MAINNET_CHAIN_ID }],
-    });
-  } catch (switchError) {
-    if (switchError.code === 4902 || switchError.data?.originalError?.code === 4902) {
-      try {
-        await provider.request({
-          method: 'wallet_addEthereumChain',
-          params: [
-            {
-              chainId: BOT_MAINNET_CHAIN_ID,
-              chainName: 'BOT Chain Mainnet',
-              rpcUrls: [BOT_MAINNET_RPC_URL],
-              blockExplorerUrls: [BOT_MAINNET_EXPLORER],
-              nativeCurrency: {
-                name: 'BOT',
-                symbol: 'BOT',
-                decimals: 18,
-              },
-            },
-          ],
-        });
-      } catch (addError) {
-        console.warn('Error adding BOT Chain Mainnet to MetaMask', addError);
-      }
-    }
+    await provider.request({ method: 'wallet_switchEthereumChain', params: [{ chainId }] });
+  } catch (error) {
+    if (error.code !== 4902 && error.data?.originalError?.code !== 4902) throw error;
+    await provider.request({ method: 'wallet_addEthereumChain', params: [{
+      chainId, chainName: name, rpcUrls: [rpc], blockExplorerUrls: [explorer],
+      nativeCurrency: { name: symbol, symbol, decimals: 18 }
+    }] });
   }
-};
-
-export const switchToBotChainTestnet = async () => {
-  const provider = getEthereumProvider();
-  if (!provider) return;
-
-  try {
-    await provider.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: BOT_TESTNET_CHAIN_ID }],
-    });
-  } catch (switchError) {
-    if (switchError.code === 4902 || switchError.data?.originalError?.code === 4902) {
-      try {
-        await provider.request({
-          method: 'wallet_addEthereumChain',
-          params: [
-            {
-              chainId: BOT_TESTNET_CHAIN_ID,
-              chainName: 'BOT Chain Testnet',
-              rpcUrls: [BOT_TESTNET_RPC_URL],
-              blockExplorerUrls: [BOT_TESTNET_EXPLORER],
-              nativeCurrency: {
-                name: 'tBOT',
-                symbol: 'tBOT',
-                decimals: 18,
-              },
-            },
-          ],
-        });
-      } catch (addError) {
-        console.warn('Error adding BOT Chain Testnet to MetaMask', addError);
-      }
-    }
-  }
-};
-
-export const getProvider = () => {
-  const provider = getEthereumProvider();
-  if (provider) {
-    return new BrowserProvider(provider);
-  }
-  return null;
-};
+  const actual = await provider.request({ method: 'eth_chainId' });
+  if (BigInt(actual) !== BigInt(chainId)) throw new Error('Wallet is on the wrong network.');
+}
+export const switchToBotChainMainnet = () => switchChain(BOT_MAINNET_CHAIN_ID, 'BOT Chain Mainnet', BOT_MAINNET_RPC_URL, BOT_MAINNET_EXPLORER, 'BOT');
+export const switchToBotChainTestnet = () => switchChain(BOT_TESTNET_CHAIN_ID, 'BOT Chain Testnet', BOT_TESTNET_RPC_URL, BOT_TESTNET_EXPLORER, 'tBOT');
+export const getProvider = () => getEthereumProvider() ? new BrowserProvider(getEthereumProvider()) : null;

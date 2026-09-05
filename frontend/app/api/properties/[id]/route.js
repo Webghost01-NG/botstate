@@ -19,7 +19,8 @@ export async function GET(request, { params }) {
 
   return NextResponse.json({
     property,
-    aiAnalysis: property.aiSummary,
+    aiAnalysis: 'Sample catalog data; not a verified appraisal.',
+    mode: 'sample',
     riskScore: property.riskScore,
     comparables
   });

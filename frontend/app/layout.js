@@ -13,8 +13,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "BOTSTATE | Your AI Real Estate Agent, On-Chain",
-  description: "Discover, analyze, and invest in tokenized properties worldwide with your AI real estate advisor.",
+  title: "BOTSTATE | Real Estate Protocol Prototype",
+  description: "Explore sample properties and inspect BOT Chain deployment records. Transactions are temporarily unavailable.",
 };
 
 export default function RootLayout({ children }) {

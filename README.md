@@ -1,99 +1,36 @@
-# 🏛️ BOTSTATE — AI-Powered Autonomous Real Estate Protocol
+# BOTSTATE
 
-[![BOT Chain Mainnet](https://img.shields.io/badge/Blockchain-BOT%20Chain%20Mainnet%20(Chain%20677)-078984?style=for-the-badge&logo=blockchain.com)](https://scan.botchain.ai)
-[![Solidity](https://img.shields.io/badge/Smart%20Contracts-Solidity%200.8.20-363636?style=for-the-badge&logo=solidity)](https://soliditylang.org/)
-[![Next.js](https://img.shields.io/badge/Frontend-Next.js%2014-000000?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![EIP-712](https://img.shields.io/badge/Security-EIP--712%20Signed%20Oracles-C9A84C?style=for-the-badge)](https://eips.ethereum.org/EIPS/eip-712)
-[![AIDID Protocol](https://img.shields.io/badge/AI%20Identity-AIDID%20Oracle%20Standard-059669?style=for-the-badge)](https://botchain.ai)
+A fractional real estate protocol prototype on BOT Chain. The current website provides a clearly labeled sample catalog, rule-based recommendations, mainnet deployment checks and read-only portfolio queries.
 
-> **Fractional global real estate investment, appraised autonomously by verifiable on-chain AI agents on BOT Chain.**
+Live application: https://frontend-ecru-nu-85.vercel.app
 
----
+## Current release: verified-flows-v1
 
-## 🌟 Live Production Links
+Purchases, property registration payments and oracle signing are disabled. The former purchase flow did not call the marketplace, and registration collected a fee without creating an asset. No sample property has a verified listing mapping. Browser storage is no longer used as proof of ownership or transaction confirmation. Sample prices and yields are not verified investments, appraisals or revenue.
 
-- 🌐 **Live Web Application:** [https://frontend-ecru-nu-85.vercel.app](https://frontend-ecru-nu-85.vercel.app)
-- 🎮 **Guided Demo (Judge Simulator):** [https://frontend-ecru-nu-85.vercel.app/demo](https://frontend-ecru-nu-85.vercel.app/demo)
-- ⛓️ **Mainnet Proof (Live On-Chain Receipts):** [https://frontend-ecru-nu-85.vercel.app/proof](https://frontend-ecru-nu-85.vercel.app/proof)
-- 🏢 **Global Marketplace (16 Curated Assets):** [https://frontend-ecru-nu-85.vercel.app/properties](https://frontend-ecru-nu-85.vercel.app/properties)
-- 🚀 **Tokenize Asset Launchpad:** [https://frontend-ecru-nu-85.vercel.app/properties/new](https://frontend-ecru-nu-85.vercel.app/properties/new)
-- 🧠 **AI Investment Advisor (AIDID Engine):** [https://frontend-ecru-nu-85.vercel.app/chat](https://frontend-ecru-nu-85.vercel.app/chat)
-- 💼 **On-Chain User Portfolio:** [https://frontend-ecru-nu-85.vercel.app/portfolio](https://frontend-ecru-nu-85.vercel.app/portfolio)
-- 🤖 **Verifiable AIDID Agent Profile:** [https://frontend-ecru-nu-85.vercel.app/agent](https://frontend-ecru-nu-85.vercel.app/agent)
+The public fallback signing key has been removed. It remains exposed in Git history and must never be reused. Any authority controlled by that key requires a separately authorized rotation before signing or administrative writes can resume. This release does not move funds, rotate on-chain authorities or deploy contracts.
 
----
+## Contracts and deployment boundary
 
-## 📜 Verified BOT Chain Mainnet Deployments (Chain ID: 677)
+Original mainnet transaction hashes and addresses remain in `shared/mainnet-deployed-addresses.json`. The proof page checks chain ID, successful creation receipt, matching contract address/block and nonempty deployed code. These checks are not an audit or compiled-runtime equivalence proof.
 
-| Contract Name | Deployed Address | Block Number | Mainnet Explorer Link |
-| :--- | :--- | :--- | :--- |
-| **PropertyRegistry** | `0x8cd2DA9E45D18c47A803f065a3625AE68bF37B17` | `20198070` | [View on BOTScan](https://scan.botchain.ai/address/0x8cd2DA9E45D18c47A803f065a3625AE68bF37B17) |
-| **RWATokenFactory** | `0x0908E0409d593409D251306302FDca0C45198B9C` | `20198081` | [View on BOTScan](https://scan.botchain.ai/address/0x0908E0409d593409D251306302FDca0C45198B9C) |
-| **Marketplace** | `0x08D1B8fD3b831e79f000fFA3B1B0F69064080f24` | `20198086` | [View on BOTScan](https://scan.botchain.ai/address/0x08D1B8fD3b831e79f000fFA3B1B0F69064080f24) |
-| **AgentActionLog** | `0xbb42F96B7Dd1FC127f7A9729C178EFE15ADa8F0a` | `20198091` | [View on BOTScan](https://scan.botchain.ai/address/0xbb42F96B7Dd1FC127f7A9729C178EFE15ADa8F0a) |
+The updated `RWAToken.sol` implements funded, pull-based dividend claims and preserves accrued rights across transfers. Updated `AgentActionLog.sol` supports EIP-712 v2 attestations with chain/contract binding, deadlines and replay nonces. **These source changes are not deployed to mainnet.** Existing deployed tokens still lack holder payouts and existing logs do not verify typed signatures. No UI action should send funds to the old dividend function.
 
----
+Token balances do not establish a verified legal claim to real property. The catalog contains sample data, not verified assets under management. No TVL, model accuracy, reputation or realized yield is asserted.
 
-## 🎯 The Core Problem & The BOTSTATE Solution
+## Development and checks
 
-### The Problem ($330T Real Estate Market Bottlenecks)
-1. **$100k+ Capital Barrier & Extreme Illiquidity**: 99% of global retail investors are excluded from prime international real estate.
-2. **Subjective & Biased Valuations**: Traditional appraisals rely on slow, manual paper assessments with zero cryptographic auditability.
-3. **Opaque Settlement & High Intermediary Fees**: Buying property takes weeks of legal bureaucracy with 5-10% broker fees.
+Frontend: Next.js 16 / React 19 / ethers 6. Contracts: Solidity 0.8.20; original deployment records are unchanged.
 
-### The BOTSTATE Solution
-1. **Fractional RWA Tokenization**: Democratizes property co-ownership starting from **0.05 BOT**.
-2. **Autonomous AIDID AI Appraiser**: Continually calculates multi-factor fair-market valuations and signs them with **EIP-712 cryptographic attestations**.
-3. **Asset Tokenization Launchpad (`/properties/new`)**: Enables any verified property owner to tokenize their deed and sell fractional shares on-chain in 30 seconds.
-4. **Automated On-Chain Yields**: Rental revenue is automatically disbursed directly to token holders' wallets on BOT Chain.
-
----
-
-## 🏗️ Technical Architecture & Cryptographic Flow
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Investor as 👤 Investor / Owner (MetaMask)
-    participant UI as 💻 Next.js 14 Frontend
-    participant AI as 🧠 BOTSTATE AI Engine
-    participant DID as 🔑 AIDID Oracle Signer
-    participant SC as ⛓️ BOT Chain Mainnet Contracts
-    
-    Investor->>UI: Selects Property or Lists New Deed
-    UI->>AI: Requests Real-Time Valuation & Risk Matrix
-    AI->>DID: Computes Multi-Factor Model & Generates EIP-712 Typed Data
-    DID->>SC: Cryptographically Signs Attestation (ECDSA)
-    SC->>SC: Verifies ecrecover(digest, v, r, s) == AIDID_ORACLE
-    Investor->>SC: Executes On-Chain Buy (BOT payment)
-    SC->>Investor: Mints Fractional RWAToken (ERC-20)
-    SC->>Investor: Disburses Automated Quarterly Rental Yields
+```sh
+npm ci --prefix frontend
+npm test --prefix frontend
+npm run build --prefix frontend
+npm ci --prefix contracts
+npm test --prefix contracts
+npm run dev --prefix frontend
 ```
 
----
+Contract tests use the local Hardhat EVM only. Production writes require secure authority, verified deployment/runtime correspondence, property-to-token-to-listing mapping and receipt-based end-to-end testing before activation.
 
-## 🔑 Mainnet Network & Oracle Configuration
-
-- **Network Name:** BOT Chain Mainnet
-- **Chain ID:** `677` (`0x2A5`)
-- **RPC Endpoint:** `https://rpc.botchain.ai`
-- **Block Explorer:** `https://scan.botchain.ai`
-- **Oracle DID / Deployer:** [`0x6CeD8D6Bad8Dfd2e60BCEA116fE74548f959f1F2`](https://scan.botchain.ai/address/0x6CeD8D6Bad8Dfd2e60BCEA116fE74548f959f1F2)
-
----
-
-## ⚙️ Quickstart & Local Setup
-
-```bash
-# Clone repository
-git clone https://github.com/Webghost01-NG/botstate.git
-cd botstate
-
-# Start Frontend & API (Port 3000)
-cd frontend && npm install && npm run dev
-```
-
----
-
-## 📄 License
-MIT License. Built for the BOT Chain Global Hackathon.
+See [PROTOCOL.md](PROTOCOL.md) for release gates and remaining limits.
