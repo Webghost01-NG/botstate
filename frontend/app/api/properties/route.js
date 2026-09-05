@@ -33,5 +33,5 @@ export async function GET(request) {
     else if (sortBy === 'risk-asc') filtered.sort((a, b) => a.riskScore - b.riskScore);
   }
 
-  return NextResponse.json({ properties: filtered, total: filtered.length });
+  return NextResponse.json({ properties: filtered, total: filtered.length, mode: 'sample', purchasesEnabled: false });
 }

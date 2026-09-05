@@ -9,7 +9,7 @@ export default function Chat() {
     {
       id: 1,
       role: 'agent',
-      content: "Welcome to BOTSTATE. I'm your AI real estate advisor powered by BOT Chain's AIDID protocol. I can help you discover, analyze, and invest in tokenized properties worldwide. What are you looking for?"
+      content: "Welcome to BOTSTATE's sample catalog assistant. I use rule-based filters to compare illustrative properties. I cannot verify appraisals, read balances in chat or execute investments. What location or sample yield would you like to explore?"
     }
   ]);
   const [input, setInput] = useState('');
